@@ -1,0 +1,49 @@
+class Node {
+    int val;
+    Node next;
+
+    Node(int val) {
+        this.val = val;
+    }
+}
+
+public class question{
+    public Node reverse(Node head) {
+        Node prev = null;
+        Node current = head;
+
+        while (current != null) {
+            Node next = current.next;
+            current.next = prev;
+            prev = current;
+            current = next;
+        }
+
+        return prev;
+    }
+
+    
+    public void opp(Node head) {
+        Node current = head;
+        while (current != null) {
+            System.out.print(current.val + " ");
+            current = current.next;
+        }
+       
+    }
+
+    public static void main(String[] args) {
+        question linked = new question();
+
+        
+        Node head = new Node(1);
+        head.next = new Node(2);
+        head.next.next = new Node(3);
+       
+        linked.opp(head);
+        System.out.println(" <-the right order");
+        Node reversed = linked.reverse(head);
+        linked.opp(reversed);
+         
+    }
+}
