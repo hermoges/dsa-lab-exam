@@ -1,0 +1,71 @@
+public class circ {
+        private int[] queue;
+        private int front;
+        private int rear;
+        private int size;
+        private int capacity;
+    
+        public circ(int capacity) {
+            this.capacity = capacity;
+            queue = new int[capacity];
+            front = 0;
+            rear = -1;
+            size = 0;
+        }
+    
+        public void enqueue(int value) {
+            if (isFull()) {
+                System.out.println("Queue is full. Cannot enqueue.");
+                return;
+            }
+            rear = (rear + 1) % capacity;
+            queue[rear] = value;
+            size++;
+        }
+    
+        public int dequeue() {
+            if (isEmpty()) {
+                System.out.println("Queue is empty. Cannot dequeue.");
+                return -1; // or throw an exception
+            }
+            int removed = queue[front];
+            front = (front + 1) % capacity;
+            size--;
+            return removed;
+        }
+    
+        public int front() {
+            if (isEmpty()) {
+                System.out.println("Queue is empty. No front element.");
+                return -1; // or throw an exception
+            }
+            return queue[front];
+        }
+    
+        public int rear() {
+            if (isEmpty()) {
+                System.out.println("Queue is empty. No rear element.");
+                return -1; // or throw an exception
+            }
+            return queue[rear];
+        }
+    
+        public boolean isEmpty() {
+            return size == 0;
+        }
+    
+        public boolean isFull() {
+            return size == capacity;
+        }
+    
+        public static void main(String[] args) {
+          circ q = new circ(3);
+            q.enqueue(1);
+            q.enqueue(2);
+            System.out.println(q.dequeue()); // Output: 1
+            q.enqueue(4);
+            System.out.println(q.front()); // Output: 2
+            System.out.println(q.rear()); // Output: 4
+        }
+    }
+
